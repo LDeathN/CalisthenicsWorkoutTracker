@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    
+    <section id="details-page">
+        <div class="info-section">
+                <a href="{% url 'info_workout' program_id=object.pk%}"><button class="edit-delete-button"><span></span>Workouts</button></a>
+        </div>
+    </section>
+    
+    <section id="details-page">
+        <div class="info-section">
+                <a href="{% url 'info_meal_plan' program_id=object.pk%}"><button class="edit-delete-button"><span></span>Meal Plans</button></a>
+        </div>
+    </section>
+    
+{% endblock %}

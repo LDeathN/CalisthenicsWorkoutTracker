@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+
+    <section id="details-page">
+        <h1>Meal Details</h1>
+        <div class="info-section">
+            <div class="details-header">
+                {% if object.image_url %}
+                    <img class="details-img" src="{{ object.image_url }}" alt="no photo">
+                {% else %}
+                    <img class="details-img" src="{% static 'images/no_image.png' %}" alt="no photo">
+                {% endif %}
+                <h4 class="description">Meal: {{ object.name }}</h4>
+                <p class="description">Calories: {{ object.calories }}</p>
+                <p class="description">Description: {{ object.description }}</p>
+                <p class="description">Meal Type: {{ object.meal_type }}</p>
+                <p class="description">Meal Type: {{ object.meal_name_type }}</p>
+                <p class="description">Carbohydrates: {{ object.carbohydrates }}</p>
+                <p class="description">Protein: {{ object.proteins }}</p>
+                <p class="description">Fats: {{ object.fats }}</p>
+                {% if request.user == object.user %}
+                    <a href="{% url 'edit_meal' pk=object.pk program_id=program.pk meal_plan_id=meal_plan.pk%}">
+                        <button class="edit-delete-button" type="button"><span></span>Edit Meal</button>
+                    </a>
+                
+                    <a href="{% url 'delete_meal' pk=object.pk program_id=program.pk meal_plan_id=meal_plan.pk%}">
+                       <button class="red-button" type="button"><span></span>Delete Meal</button>
+                    </a>
+                {% endif %}
+                <a href="{% url 'info_meals' program_id=program.pk meal_plan_id=meal_plan.pk%}"> 
+                        <button class="edit-delete-button"><span></span>Back</button>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <div id="create-page">
+        <div class="container">
+            <h1>Create Program</h1>
+    
+            <form action="{% url 'create_program' %}" method="post">
+                {% csrf_token %}
+                
+                {{ form }}
+                
+                <button type="submit"><span></span>Create Program</button>
+            </form>
+            <a href="{% url 'dashboard' %}"> 
+                <button class="edit-delete-button"><span></span>Back</button>
+            </a>
+    </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <section id="details-page">
+        <h1>Exercise Details</h1>
+    <div class="info-section">
+        <div class="details-header">
+        <h4 class="description">Exercise: {{ object.name }}</h4>
+        <p class="description">Difficulty: {{ object.difficulty }}</p>
+        <p class="description">Repetitions: {{ object.repetitions }}</p>
+        <p class="description">Description: {{ object.description }}</p>
+        
+        {% if request.user == object.user %}
+            <a href="{% url 'edit_exercise' pk=object.pk program_id=program.pk workout_id=workout.pk%}">
+                <button class="edit-delete-button" type="button"><span></span>Edit Exercise</button>
+            </a>
+        
+            <a href="{% url 'delete_exercise' pk=object.pk program_id=program.pk workout_id=workout.pk%}">
+                <button class="red-button" type="button"><span></span>Delete Exercise</button>
+            </a>
+        {% endif %}
+        <a href="{% url 'info_exercise' program_id=program.pk workout_id=workout.pk%}"> 
+                <button class="edit-delete-button"><span></span>Back</button>
+        </a>
+        </div>
+    </div>
+    </section>
+    
+{% endblock %}

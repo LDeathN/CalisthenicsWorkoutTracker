@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <div class="add-button">
+        <a href="{% url 'create_meal_plan' program_id=program.pk%}"><button type="button"><span></span>Add Meal Plan</button></a>
+    </div>
+    {% if not meal_plans %}
+      <p class="no-meal-plans">No meal plans yet</p>
+        
+    
+    {% else %}
+    
+      <section id="meal-plans">
+        <h1>Total Meal Plans: {{ meal_plans.count }}</h1>
+      
+        {% for meal_plan in meal_plans %}
+            <div class="meal-plan-card">
+            <h1>{{ meal_plan.name }}</h1>
+            <p>Meal Plan Type: {{ meal_plan.meal_plan_type }}</p>
+              <div class="image-wrap">
+                  {% if meal_plan.image_url %}
+                    <img src="{{ meal_plan.image_url }}" alt="no photo"/>
+                  {% else %}
+                    <img src="{% static 'images/no_image.png' %}" alt="">
+                  {% endif %}
+              </div>
+              <div>
+                  <a href="{% url 'details_meal_plan' pk=meal_plan.pk program_id=program.pk%}"><button><span></span>Details</button></a>
+                  <a href="{% url 'info_meals' meal_plan_id=meal_plan.pk program_id=program.pk%}"><button><span></span>Meals</button></a>
+              </div>
+            </div>    
+        {% endfor %}
+      {% endif %}
+        <div class="back">
+            <a href="{% url 'dashboard' %}"> 
+                <button type="button"><span></span>Back</button>
+            </a> 
+        </div>
+           
+      </section>
+    
+{% endblock %}

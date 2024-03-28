@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main_content %}
+
+    <div class="login-register-box">
+        <div class="container">
+            <h1>WorkoutTracker</h1>
+            
+            <form action="{% url 'signup' %}" method="post" >
+                {{ form }}
+                
+                <button class="edit-delete-button" type="submit"><span></span>Register</button>
+                {% csrf_token %}
+            </form>
+            <div>
+                <p>Have an account? <a href="{% url 'signin' %}"><button class="edit-delete-button" type="button"><span></span>Log in</button></a></p>
+            </div>
+        </div>
+        
+    </div>
+{% endblock %}

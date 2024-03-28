@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <div class="add-button">
+        <a href="{% url 'create_workout' program_id=program.pk %}"><button><span></span>Add Workout</button></a>
+    </div>
+    
+    
+    {% if not workouts %}
+      <p class="no-workouts">No workouts yet</p>
+        
+    
+    {% else %}
+    
+      <section id="workouts">
+        <h1>Total workouts: {{ workouts.count }}</h1>
+      
+        {% for workout in workouts %}
+            <div class="workout-card">
+            <h1>{{ workout.name }}</h1>
+              <div class="image-wrap">
+                  {% if workout.image_url %}
+                    <img src="{{ workout.image_url }}" alt="no photo"/>
+                  {% else %}
+                    <img src="{% static 'images/no_image.png' %}" alt="">
+                  {% endif %}
+              </div>
+              <div>
+                  <a href="{% url 'details_workout' pk=workout.pk program_id=program.pk%}"><button type="button"><span></span>Details</button></a>
+                  <a href="{% url 'info_exercise' program_id=program.pk workout_id=workout.pk%}"><button type="button"><span></span>Exercises</button></a>
+              </div>
+            </div>    
+        {% endfor %}
+      {% endif %}
+        <div class="back">
+            <a href="{% url 'dashboard' %}"> 
+                <button type="button"><span></span>Back</button>
+            </a> 
+        </div>
+      </section>
+    
+{% endblock %}
+
+

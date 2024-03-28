@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <div id="create-page">
+        <div class="container">
+            <h1>Create Meal Plan</h1>
+        
+            <form action="{% url 'create_meal_plan' program_id=program.pk%}" method="post">
+                {% csrf_token %}
+                
+                {{ form }}
+                
+                <button type="submit"><span></span>Create Meal Plan</button>
+            </form>
+            <a href="{% url 'info_meal_plan' program_id=program.pk%}"> 
+                <button class="edit-delete-button"><span></span>Back</button>
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

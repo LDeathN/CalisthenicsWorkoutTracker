@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+
+    <div id="delete-page">
+        <div class="container">
+            <h1>Delete Profile</h1>
+        
+            <form action="{% url 'delete_user' request.user.pk %}" method="post">
+                
+                {% csrf_token %}
+                <div>
+                    <button class="red-button"><span></span>Yes</button>
+                </div>
+                
+            </form>
+            <a href="javascript:history.back()"><button><span></span>Go Back</button></a>
+        </div>
+    </div>
+    
+{% endblock %}

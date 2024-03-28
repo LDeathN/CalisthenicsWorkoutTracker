@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <section id="details-page">
+        <h1>Profile Details</h1>
+        <div class="info-section">
+            <div class="details-header">
+                {% if object.profile_picture %}
+                    <img class="details-img" src="{{ object.profile_picture }}" alt="img">
+                {% else %}
+                    <img class="details-img" src="{% static 'images/no_image.png' %}" alt="img">
+                {% endif %}
+
+                {% if object.username %}
+                    <p class="description">Username: {{ object.username }}</p>
+                {% else %}
+                    <p class="description">No Username</p>
+                {% endif %}
+
+                <!-- TODO:Fix this up! -->
+                <p class="description">Programs: {{ programs.count }}</p>
+
+                <p class="description">Workouts: {{ workouts.count }}</p>
+
+                <p class="description">Meal Plans: {{ meal_plans.count }}</p>
+                {% if object.full_name %}
+                    <h3 class="description">Full Name: {{ object.full_name }}</h3>
+                {% endif %}
+
+                <p class="description">Date Of Birth: {{ object.date_of_birth }}</p>
+
+                <p class="description">Email: {{ object.user.email }}</p>
+                
+                {% if object.pk == request.user.pk %}
+                    <a href="{% url 'edit_user' pk=request.user.pk %}">
+                        <button class="edit-delete-button" type="button"><span></span>Edit Profile</button>
+                    </a>
+
+                    <a href="{% url 'delete_user' pk=request.user.pk %}">
+                        <button class="red-button" type="button"><span></span>Delete Profile</button>
+                    </a>
+                    
+                    <a href="{% url 'dashboard' %}"> 
+                        <button class="edit-delete-button"><span></span>Back</button>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    
+{% endblock %}

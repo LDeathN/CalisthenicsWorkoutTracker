@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    
+    <section id="details-page">
+        <h1>Program Details</h1>
+        <div class="info-section">
+            <div class="details-header">
+                {% if program.image_url %}
+                    <img class="details-img" src="{{ program.image_url }}" alt="no photo">
+                {% else %}
+                    <img class="details-img" src="{% static 'images/no_image.png' %}" alt="nothing">
+                {% endif %}
+                <h4 class="description">Program: {{ program.name }}</h4>
+                <p class="description">Start Date: {{ program.start_date }}</p>
+                <p class="description">End Date: {{ program.end_date }}</p>
+                <p class="description">Description: {{ program.description }}</p>
+                {% if request.user == program.user %}
+    
+                    <a href="{% url 'edit_program' pk=program.pk%}">
+                        <button class="edit-delete-button" type="button"><span></span>Edit Program</button>
+                    </a>
+                
+                    <a href="{% url 'delete_program' pk=program.pk%}">
+                        <button class="red-button" type="button"><span></span>Delete Program</button>
+                    </a>
+            
+                {% endif %}
+            <a href="{% url 'dashboard' %}"> 
+                    <button class="edit-delete-button"><span></span>Back</button>
+            </a>
+        </div>
+        </div>
+    </section>
+{% endblock %}

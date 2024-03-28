@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block main_content %}
+    <section id="details-page">
+    <h1>Workout Details</h1>
+    <div class="info-section">
+        <div class="details-header">
+        {% if object.image_url %}
+            <img class="details-img" src="{{ object.image_url }}" alt="no photo">
+        {% else %}
+            <img class="details-img" src="{% static 'images/no_image.png' %}" alt="nothing">
+        {% endif %}
+        <h4 class="description">Workout: {{ object.name }}</h4>
+        <p class="description">Difficulty: {{ object.difficulty }}</p>
+        <p class="description">Duration: {{ object.duration }}</p>
+         <p class="description">Description: {{ object.description }}</p>
+        {% if request.user == object.user %}
+            
+            <a href="{% url 'edit_workout' pk=object.pk program_id=program.pk%}">
+                <button class="edit-delete-button" type="button"><span></span>Edit Workout</button>
+            </a>
+        
+            <a href="{% url 'delete_workout' pk=object.pk program_id=program.pk%}">
+                <button class="red-button" type="button"><span></span>Delete Workout</button>
+            </a>
+            
+        {% endif %}
+        <a href="{% url 'info_workout' program_id=program.pk%}"> 
+                <button class="edit-delete-button"><span></span>Back</button>
+        </a>
+        </div>
+    </div>
+    </section>
+    
+{% endblock %}

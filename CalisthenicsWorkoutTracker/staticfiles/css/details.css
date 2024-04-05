@@ -51,7 +51,7 @@ button:hover, .edit-delete-button:hover, .red-button:hover{
     transition: all 0.4s;
 }
 
-#details-page>h1{
+#details-page>h1, h2{
     letter-spacing: 10px;
     font-family: 'Cinzel', serif;
     color: white;
